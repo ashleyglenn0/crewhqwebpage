@@ -1,0 +1,24 @@
+/* CrewHQ full-width base */
+* { box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: block;
+  min-width: 320px;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Optional: link baseline (your App.jsx styles handle most links) */
+a { text-decoration: none; }

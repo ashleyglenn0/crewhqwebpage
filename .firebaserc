@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "default": "volunteercheckin-3659e",
+    "prod": "volunteercheckin-3659e"
+  },
+  "targets": {
+    "volunteercheckin-3659e": {
+      "hosting": {
+        "crewhqllc": [
+          "crewhqllc"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
