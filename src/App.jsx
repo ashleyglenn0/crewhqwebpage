@@ -3,7 +3,8 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "./firebase";
 import { theme } from "./theme";
 import logoMint from "./assets/logo.jpg";
-import founderPhoto from "./assets/mikal-ashley.jpeg";
+import ashleyPhoto from "./assets/ashley.jpeg";
+import mikalPhoto from "./assets/mikal.JPEG";
 
 const CONTAINER = 1240;
 
@@ -109,11 +110,50 @@ const Pill = ({ children }) => (
   </span>
 );
 
+const FounderCard = ({ name, title, bio, photo, imgPosition = "50% 25%" }) => (
+  <Card>
+    <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      <div
+        style={{
+          width: 72,
+          height: 72,
+          borderRadius: 14,
+          overflow: "hidden",
+          border: "1px solid rgba(10,59,72,0.18)",
+          background: "rgba(10,59,72,0.06)",
+          flexShrink: 0,
+        }}
+      >
+        <img
+          src={photo}
+          alt={name}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: imgPosition, // crop left/right from the same photo
+            display: "block",
+          }}
+        />
+      </div>
+
+      <div>
+        <div style={{ fontWeight: 900, color: theme.primary, fontSize: 18 }}>
+          {name}
+        </div>
+        <div style={{ fontWeight: 800, opacity: 0.9 }}>{title}</div>
+      </div>
+    </div>
+
+    <p style={{ marginTop: 14, lineHeight: 1.6, opacity: 0.95 }}>{bio}</p>
+  </Card>
+);
+
 export default function App() {
   const [sales, setSales] = useState({
-    name: "",
+    contactName: "",
     email: "",
-    company: "",
+    orgName: "",
     role: "",
     eventType: "",
     message: "",
@@ -134,10 +174,9 @@ export default function App() {
 
   const nav = useMemo(
     () => [
-      { label: "About", href: "#about" },
-      { label: "Capabilities", href: "#services" },
+      { label: "About", href: "#founders" },
+      { label: "Service Pillars", href: "#pillars" },
       { label: "Engagement Model", href: "#how" },
-      { label: "Operating Doctrine", href: "#principles" },
       { label: "Talent Network", href: "#work" },
       { label: "Contact", href: "#contact" },
     ],
@@ -243,6 +282,7 @@ export default function App() {
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             </div>
+
             <div
               style={{
                 fontWeight: 900,
@@ -255,12 +295,16 @@ export default function App() {
             </div>
           </div>
 
+          {/* Nav links: single line + scroll on portrait */}
           <div
             style={{
               display: "flex",
-              gap: 16,
-              flexWrap: "wrap",
-              justifyContent: "flex-end",
+              gap: 14,
+              flexWrap: "nowrap",
+              overflowX: "auto",
+              WebkitOverflowScrolling: "touch",
+              justifyContent: "flex-start",
+              paddingBottom: 2,
             }}
           >
             {nav.map((n) => (
@@ -276,6 +320,7 @@ export default function App() {
                   textTransform: "uppercase",
                   opacity: 0.8,
                   transition: "opacity 140ms ease",
+                  whiteSpace: "nowrap",
                 }}
               >
                 {n.label}
@@ -346,7 +391,7 @@ export default function App() {
                 <Button>Book a Discovery Call</Button>
               </a>
               <a href="#work" style={{ textDecoration: "none" }}>
-                <Button variant="secondary">Join Our Staff Pool</Button>
+                <Button variant="secondary">Join Talent Network</Button>
               </a>
             </div>
 
@@ -383,7 +428,7 @@ export default function App() {
                 }}
               />
               <div style={{ fontWeight: 900, color: theme.primary }}>
-                CrewHQ Operating Philosophy
+                Operating Philosophy
               </div>
             </div>
 
@@ -408,13 +453,84 @@ export default function App() {
         </div>
       </section>
 
-      {/* Services */}
-      <Section id="services" title="Capabilities">
-        <p style={{ fontSize: 18, maxWidth: 920, opacity: 0.95 }}>
+      {/* Founders */}
+      <Section id="founders" title="Meet the Founders" alt>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 24,
+            alignItems: "stretch",
+          }}
+        >
+          <FounderCard
+            name="Ashley Glenn"
+            photo={ashleyPhoto}
+            title="Founder • People Infrastructure & Operations"
+            bio="Ashley builds people infrastructure for high-coordination environments—architecting the systems, expectations, and leadership rhythms that prevent chaos at scale. With a background spanning technology, live operations, and organizational design, she develops scalable frameworks that align leadership, workflow, and day-of execution. Her work centers on operational clarity, volunteer and contractor enablement, and structured ecosystems where teams feel supported and performance can scale without confusion."
+            imgPosition="30% 25%"
+          />
+          <FounderCard
+            name="Mikal Driver"
+            photo={mikalPhoto}
+            title="Founder • People Infrastructure Strategist"
+            bio="Mikal designs people-centered systems at the intersection of education, equity, and opportunity, building aligned ecosystems that move people from potential to power. With over eleven years of experience as an educator and youth development strategist, he architects leadership development, culture design, and partnership models that create measurable and sustainable outcomes. His work focuses on aligning data, family engagement, and institutional decision-making to transform long-term trajectories."
+            imgPosition="70% 25%"
+          />
+        </div>
+      </Section>
+
+      {/* Service Pillars + Where CrewHQ Fits (combined) */}
+      <Section id="pillars" title="Service Pillars">
+        <p style={{ fontSize: 18, maxWidth: 980, opacity: 0.95 }}>
           CrewHQ operates through a layered people infrastructure model designed
           to create sustainable, scalable operational environments.
         </p>
 
+        {/* Where CrewHQ Fits — merged intro */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+            gap: 24,
+            marginTop: 22,
+          }}
+        >
+          <Card>
+            <h3 style={{ margin: 0, color: theme.primary, fontSize: 20 }}>
+              Operational Infrastructure Blueprint
+            </h3>
+            <p style={{ marginTop: 10, lineHeight: 1.55 }}>
+              A documented operating model: roles, workflows, escalation paths,
+              staffing logic, and the system your team can run without
+              improvising under pressure.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 style={{ margin: 0, color: theme.primary, fontSize: 20 }}>
+              Leadership Enablement Package
+            </h3>
+            <p style={{ marginTop: 10, lineHeight: 1.55 }}>
+              Clear expectations, training assets, and coordinator/team lead
+              playbooks that translate the system into consistent execution
+              across people and shifts.
+            </p>
+          </Card>
+
+          <Card>
+            <h3 style={{ margin: 0, color: theme.primary, fontSize: 20 }}>
+              Execution Reinforcement & Debrief
+            </h3>
+            <p style={{ marginTop: 10, lineHeight: 1.55 }}>
+              On-the-ground reinforcement (when needed), plus post-engagement
+              insights and revisions so the system improves with each cycle—not
+              just each event.
+            </p>
+          </Card>
+        </div>
+
+        {/* 2x2 Pillars */}
         <div
           style={{
             display: "grid",
@@ -438,11 +554,12 @@ export default function App() {
               </h3>
             </div>
             <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              We deliver structured execution support in live environments,
-              ensuring systems and leadership frameworks are implemented
-              effectively in real-world conditions.
+              Structured execution support in live environments, ensuring
+              systems and leadership frameworks are implemented effectively in
+              real-world conditions.
             </p>
           </Card>
+
           <Card>
             <div
               style={{
@@ -458,11 +575,12 @@ export default function App() {
               </h3>
             </div>
             <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              We equip leaders, team leads, and coordinators with clarity,
+              Leader, team lead, and coordinator enablement through clarity,
               expectations, and cultural alignment necessary to execute within
               designed systems.
             </p>
           </Card>
+
           <Card>
             <div
               style={{
@@ -474,7 +592,7 @@ export default function App() {
             >
               <Pill>Pillar 3</Pill>
               <h3 style={{ margin: 0, color: theme.primary, fontSize: 22 }}>
-                Event Planning & Strategic Design (supporting)
+                Strategic Design Support (when required)
               </h3>
             </div>
             <p style={{ marginTop: 10, lineHeight: 1.55 }}>
@@ -487,6 +605,7 @@ export default function App() {
               systems and leadership structures — not as standalone labor.
             </p>
           </Card>
+
           <Card>
             <div
               style={{
@@ -502,58 +621,16 @@ export default function App() {
               </h3>
             </div>
             <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              We design the underlying systems, workflows, and structural
-              frameworks that enable organizations to operate effectively —
-              including process architecture, operational modeling, and
-              long-term advisory support.
-            </p>
-          </Card>
-        </div>
-      </Section>
-      <Section id="deliver" title="Where CrewHQ Fits">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-            gap: 24,
-            marginTop: 8,
-          }}
-        >
-          <Card>
-            <h3 style={{ margin: 0, color: theme.primary, fontSize: 20 }}>
-              Operating System Design
-            </h3>
-            <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              Structural infrastructure design including workflow architecture,
-              escalation frameworks, and operational modeling that supports
-              long-term scalability.
-            </p>
-          </Card>
-
-          <Card>
-            <h3 style={{ margin: 0, color: theme.primary, fontSize: 20 }}>
-              Leadership Enablement
-            </h3>
-            <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              Role clarity, cultural alignment, and structured training to
-              ensure leadership execution matches the designed system.
-            </p>
-          </Card>
-
-          <Card>
-            <h3 style={{ margin: 0, color: theme.primary, fontSize: 20 }}>
-              Structured Execution Support
-            </h3>
-            <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              Live-environment operational reinforcement delivered within
-              defined systems and leadership structures — not transactional
-              staffing.
+              The underlying systems, workflows, and structural frameworks that
+              enable organizations to operate effectively — including process
+              architecture, operational modeling, and long-term advisory
+              support.
             </p>
           </Card>
         </div>
       </Section>
 
-      {/* How it works */}
+      {/* Engagement Model */}
       <Section id="how" title="Engagement Model" alt>
         <div style={{ display: "grid", gap: 16 }}>
           {[
@@ -582,130 +659,65 @@ export default function App() {
             </Card>
           ))}
         </div>
-      </Section>
 
-      {/* Principles */}
-      <Section id="principles" title="Operating Doctrine">
-        <div style={{ display: "grid", gap: 16 }}>
-          {[
-            [
-              "People First",
-              "Volunteers and contractors are partners, not disposable labor.",
-            ],
-            [
-              "Clarity Over Chaos",
-              "Defined roles prevent burnout and confusion.",
-            ],
-            ["Consistency at Scale", "Growth must not degrade experience."],
-            [
-              "Flexibility in Execution",
-              "Plans adapt to real-world conditions.",
-            ],
-            [
-              "Respect the Day-Of Reality",
-              "Judgment is valued over rigid scripts.",
-            ],
-          ].map(([t, d]) => (
-            <Card key={t}>
-              <h3 style={{ margin: 0, color: theme.primary, fontSize: 22 }}>
-                {t}
-              </h3>
-              <p style={{ marginTop: 10, lineHeight: 1.55 }}>{d}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      <Section id="about" title="About CrewHQ" alt>
+        {/* Divider */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 24,
-            alignItems: "stretch",
+            marginTop: 60,
+            paddingTop: 40,
+            borderTop: "1px solid rgba(10,59,72,0.15)",
           }}
         >
-          {/* Left Card – Text */}
-          <Card>
-            <div
-              style={{
-                height: "100%",
-                minHeight: 280, // match image card height
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center", // this moves it down / centers vertically
-              }}
-            >
-              <h3
-                style={{
-                  margin: 0,
-                  color: theme.primary,
-                  fontSize: 22,
-                }}
-              >
-                Founder-led operations
-              </h3>
+          <h3
+            style={{
+              margin: 0,
+              fontSize: 24,
+              color: theme.primary,
+              fontWeight: 900,
+            }}
+          >
+            Guiding Principles
+          </h3>
 
-              <p
-                style={{
-                  marginTop: 14,
-                  lineHeight: 1.6,
-                }}
-              >
-                CrewHQ is a people infrastructure and operations firm built for
-                high-coordination environments. We design the systems, clarify
-                leadership expectations, and support execution so teams can
-                scale without chaos.
-              </p>
-
-              <div
-                style={{
-                  marginTop: 16,
-                  fontWeight: 900,
-                  color: theme.primary,
-                  letterSpacing: 0.3,
-                }}
-              >
-                Ashley Glenn • Mikal Driver
-              </div>
-            </div>
-          </Card>
-
-          {/* Right Card – Image */}
-          <Card>
-            <h3 style={{ margin: 0, color: theme.primary, fontSize: 22 }}>
-              Our Founders
-            </h3>
-
-            <div
-              style={{
-                marginTop: 16,
-                height: 280,
-                borderRadius: 16,
-                overflow: "hidden",
-                border: "1px solid rgba(10,59,72,0.18)",
-              }}
-            >
-              <img
-                src={founderPhoto}
-                alt="Photo of Mikal and Ashley"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                }}
-              />
-            </div>
-          </Card>
+          <div
+            style={{
+              display: "grid",
+              gap: 16,
+              marginTop: 20,
+            }}
+          >
+            {[
+              [
+                "People First",
+                "Volunteers and contractors are partners, not disposable labor.",
+              ],
+              [
+                "Clarity Over Chaos",
+                "Defined roles and expectations prevent burnout and confusion.",
+              ],
+              [
+                "Respect the Day-Of Reality",
+                "Judgment and adaptability matter more than rigid scripts.",
+              ],
+            ].map(([t, d]) => (
+              <Card key={t}>
+                <h4 style={{ margin: 0, color: theme.primary, fontSize: 18 }}>
+                  {t}
+                </h4>
+                <p style={{ marginTop: 8, lineHeight: 1.55 }}>{d}</p>
+              </Card>
+            ))}
+          </div>
         </div>
       </Section>
 
-      {/* Work with us */}
-      <Section id="work" title="Work with us" alt>
+      {/* Talent Network */}
+      <Section id="work" title="Talent Network" alt>
         <Card>
           <p style={{ marginTop: 0, fontWeight: 900, lineHeight: 1.55 }}>
-            Join our volunteer and independent contractor talent network.
+            Join our talent network.
+          </p>
+          <p style={{ marginTop: 10, lineHeight: 1.55 }}>
             Opportunities may be volunteer-based or project-based contractor
             engagements depending on scope and event requirements. Engagements
             are structured in accordance with applicable independent contractor
@@ -769,11 +781,11 @@ export default function App() {
               }}
             >
               <Button type="submit">
-                {talentStatus === "loading" ? "Submitting..." : "Join the Pool"}
+                {talentStatus === "loading" ? "Submitting..." : "Submit"}
               </Button>
               {talentStatus === "success" && (
                 <span style={{ fontWeight: 900, color: theme.primary }}>
-                  Got it — we’ll be in touch.
+                  Received — we’ll be in touch.
                 </span>
               )}
               {talentStatus === "error" && (
@@ -787,20 +799,22 @@ export default function App() {
       </Section>
 
       {/* Contact / Sales */}
-      <Section id="contact" title="Book a discovery call">
+      <Section id="contact" title="Contact">
         <div style={{ display: "grid", gap: 16 }}>
           <Card>
-            <p style={{ marginTop: 0 }}>
-              Prefer to book immediately? Use Calendly:
+            <p style={{ marginTop: 0, fontWeight: 900 }}>
+              Book a discovery call
             </p>
+
             <a
               href="https://calendly.com/ashley-crewhqllc/new-meeting"
               target="_blank"
               rel="noreferrer"
-              style={{ color: theme.primary, fontWeight: 900 }}
+              style={{ textDecoration: "none" }}
             >
-              calendly.com/ashley-crewhqllc/new-meeting
+              <Button>Open Calendly</Button>
             </a>
+
             <div
               style={{
                 marginTop: 14,
@@ -828,8 +842,8 @@ export default function App() {
             >
               <input
                 placeholder="Full name"
-                value={sales.name}
-                onChange={(e) => setSales({ ...sales, name: e.target.value })}
+                value={sales.contactName}
+                onChange={(e) => setSales({ ...sales, contactName: e.target.value })}
               />
               <input
                 placeholder="Email"
@@ -838,9 +852,9 @@ export default function App() {
               />
               <input
                 placeholder="Company / Organization"
-                value={sales.company}
+                value={sales.orgName}
                 onChange={(e) =>
-                  setSales({ ...sales, company: e.target.value })
+                  setSales({ ...sales, orgName: e.target.value })
                 }
               />
               <input
@@ -920,9 +934,7 @@ export default function App() {
             flexWrap: "wrap",
           }}
         >
-          <div style={{ fontWeight: 900, color: theme.primary }}>
-            CrewHQ LLC
-          </div>
+          <div style={{ fontWeight: 900, color: theme.primary }}>CrewHQ</div>
           <div style={{ fontWeight: 800 }}>
             <a
               href="mailto:sales@crewhqllc.com"
@@ -955,23 +967,43 @@ export default function App() {
           border-color: rgba(10,59,72,0.55);
           box-shadow: 0 0 0 4px rgba(10,59,72,0.12);
         }
-        nav a:hover {
-          opacity: 1;
-        }
+        a:hover { opacity: 0.92; }
         footer a {
           transition: opacity 160ms ease;
         }
-        footer a:hover {
-          opacity: 0.75;
-        }
-        a:hover { opacity: 0.92; }
-        @media (max-width: 900px) {
-         h1 { font-size: 44px !important; }
+        footer a:hover { opacity: 0.75; }
 
-        section div[style*="gridTemplateColumns"] {
-        grid-template-columns: 1fr !important;
-    }
+        /* Portrait / mobile cleanup */
+        @media (max-width: 768px) and (orientation: portrait) {
+
+  /* Reduce section padding */
+  section {
+    padding: 80px 20px !important;
   }
+
+  /* Collapse all grids */
+  section div[style*="grid-template-columns"] {
+  grid-template-columns: 1fr !important;
+}
+
+  /* Hero headline scale */
+  h1 {
+    font-size: 36px !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.6px !important;
+  }
+
+  h2 {
+    font-size: 32px !important;
+  }
+
+  /* Reduce hero vertical padding */
+  section:first-of-type {
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+  }
+
+}
       `}</style>
     </div>
   );
