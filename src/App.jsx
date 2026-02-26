@@ -131,7 +131,7 @@ const FounderCard = ({ name, title, bio, photo, imgPosition = "50% 25%" }) => (
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: imgPosition, // crop left/right from the same photo
+            objectPosition: imgPosition,
             display: "block",
           }}
         />
@@ -177,6 +177,8 @@ export default function App() {
       { label: "About", href: "#founders" },
       { label: "Service Pillars", href: "#pillars" },
       { label: "Engagement Model", href: "#how" },
+      // ✅ ADD: Walkthrough CTA anchor
+      { label: "Walkthrough", href: "#walkthrough" },
       { label: "Talent Network", href: "#work" },
       { label: "Contact", href: "#contact" },
     ],
@@ -220,11 +222,14 @@ export default function App() {
       setTalent({
         name: "",
         email: "",
+        linkedin: "",
+        social: "",
         phone: "",
         city: "",
         availability: "",
         interests: "",
         experience: "",
+        preference: "",
       });
     } catch (err) {
       console.error(err);
@@ -390,6 +395,12 @@ export default function App() {
               <a href="#contact" style={{ textDecoration: "none" }}>
                 <Button>Book a Discovery Call</Button>
               </a>
+
+              {/* ✅ ADD: Walkthrough CTA (framed as part of the system) */}
+              <a href="#walkthrough" style={{ textDecoration: "none" }}>
+                <Button variant="secondary">30-Min Walkthrough</Button>
+              </a>
+
               <a href="#work" style={{ textDecoration: "none" }}>
                 <Button variant="secondary">Join Talent Network</Button>
               </a>
@@ -433,7 +444,7 @@ export default function App() {
             </div>
 
             <p style={{ marginTop: 12, opacity: 0.95, lineHeight: 1.5 }}>
-              Well-supported people create successful operations. Systems are
+              Well supported people create successful operations. Systems are
               designed to promote clarity, accountability, adaptability, and
               respect in live environments.
             </p>
@@ -453,6 +464,105 @@ export default function App() {
         </div>
       </section>
 
+      {/* ✅ ADD: Walkthrough CTA Section */}
+      <Section id="walkthrough" title="30-Minute Walkthrough" alt>
+        <Card>
+          <p style={{ marginTop: 0, fontWeight: 900, lineHeight: 1.55 }}>
+            See how CrewHQ operationalizes live environments.
+          </p>
+          <p style={{ marginTop: 10, lineHeight: 1.55, maxWidth: 980 }}>
+            This is a structured walkthrough of how we build clarity and reduce
+            day-of risk, including what event leadership can track, what team
+            leads manage, and what volunteers experience on-site. The software
+            is one part of the system; the operating model is the product.
+          </p>
+
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+              gap: 14,
+              marginTop: 16,
+            }}
+          >
+            <div
+              style={{
+                padding: 14,
+                borderRadius: 12,
+                border: "1px solid rgba(10,59,72,0.12)",
+                background: "rgba(10,59,72,0.05)",
+              }}
+            >
+              <div style={{ fontWeight: 900, color: theme.primary }}>
+                What you’ll see
+              </div>
+              <div style={{ marginTop: 8, lineHeight: 1.55, opacity: 0.95 }}>
+                Executive visibility, team lead coordination, and volunteer flow.
+              </div>
+            </div>
+
+            <div
+              style={{
+                padding: 14,
+                borderRadius: 12,
+                border: "1px solid rgba(10,59,72,0.12)",
+                background: "rgba(10,59,72,0.05)",
+              }}
+            >
+              <div style={{ fontWeight: 900, color: theme.primary }}>
+                Who it’s for
+              </div>
+              <div style={{ marginTop: 8, lineHeight: 1.55, opacity: 0.95 }}>
+                Event founders, ops leads, and teams planning high-coordination work.
+              </div>
+            </div>
+
+            <div
+              style={{
+                padding: 14,
+                borderRadius: 12,
+                border: "1px solid rgba(10,59,72,0.12)",
+                background: "rgba(10,59,72,0.05)",
+              }}
+            >
+              <div style={{ fontWeight: 900, color: theme.primary }}>
+                Outcome
+              </div>
+              <div style={{ marginTop: 8, lineHeight: 1.55, opacity: 0.95 }}>
+                Clear next steps for staffing, enablement, and execution support.
+              </div>
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              gap: 12,
+              marginTop: 18,
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            <a
+              href="https://calendly.com/ashley-crewhqllc/new-meeting-clone"
+              target="_blank"
+              rel="noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              <Button>Schedule the Walkthrough</Button>
+            </a>
+
+            <a href="#contact" style={{ textDecoration: "none" }}>
+              <Button variant="secondary">Prefer discovery first</Button>
+            </a>
+
+            <span style={{ fontWeight: 800, color: theme.textMuted }}>
+              30 minutes • focused walkthrough • Q&A included
+            </span>
+          </div>
+        </Card>
+      </Section>
+
       {/* Founders */}
       <Section id="founders" title="Meet the Founders" alt>
         <div
@@ -467,14 +577,14 @@ export default function App() {
             name="Ashley Glenn"
             photo={ashleyPhoto}
             title="Founder • People Infrastructure & Operations"
-            bio="Ashley builds people infrastructure for high-coordination environments—architecting the systems, expectations, and leadership rhythms that prevent chaos at scale. With a background spanning technology, live operations, and organizational design, she develops scalable frameworks that align leadership, workflow, and day-of execution. Her work centers on operational clarity, volunteer and contractor enablement, and structured ecosystems where teams feel supported and performance can scale without confusion."
+            bio="Ashley builds people infrastructure for high-coordination environments, architecting the systems, expectations, and leadership rhythms that prevent chaos at scale. With a background spanning technology, live operations, and organizational design, she develops scalable frameworks that align leadership, workflow, and day-of execution. Her work centers on operational clarity, volunteer and contractor enablement, and structured ecosystems where teams feel supported and performance can scale without confusion."
             imgPosition="30% 25%"
           />
           <FounderCard
             name="Mikal Driver"
             photo={mikalPhoto}
             title="Founder • People Infrastructure Strategist"
-            bio="Mikal designs people-centered systems at the intersection of education, equity, and opportunity, building aligned ecosystems that move people from potential to power. With over eleven years of experience as an educator and youth development strategist, he architects leadership development, culture design, and partnership models that create measurable and sustainable outcomes. His work focuses on aligning data, family engagement, and institutional decision-making to transform long-term trajectories."
+            bio="Mikal designs people-centered systems at the intersection of education, equity, and opportunity, building aligned ecosystems that move people from potential to power. With over eleven years of experience as an educator and youth development strategist, he architects leadership development, culture design, and partnership models that create measurable and sustainable outcomes. His work focuses on aligning data, family engagement, and institutional decision making to transform long-term trajectories."
             imgPosition="70% 25%"
           />
         </div>
@@ -523,8 +633,8 @@ export default function App() {
               Execution Reinforcement & Debrief
             </h3>
             <p style={{ marginTop: 10, lineHeight: 1.55 }}>
-              On-the-ground reinforcement (when needed), plus post-engagement
-              insights and revisions so the system improves with each cycle—not
+              On the ground reinforcement (when needed), plus post-engagement
+              insights and revisions so the system improves with each cycle, not
               just each event.
             </p>
           </Card>
@@ -602,7 +712,7 @@ export default function App() {
             <p style={{ marginTop: 10, fontWeight: 900, lineHeight: 1.55 }}>
               CrewHQ prioritizes systemic design and human enablement over
               transactional staffing. Execution is delivered within defined
-              systems and leadership structures — not as standalone labor.
+              systems and leadership structures, not as standalone labor.
             </p>
           </Card>
 
@@ -622,7 +732,7 @@ export default function App() {
             </div>
             <p style={{ marginTop: 10, lineHeight: 1.55 }}>
               The underlying systems, workflows, and structural frameworks that
-              enable organizations to operate effectively — including process
+              enable organizations to operate effectively, including process
               architecture, operational modeling, and long-term advisory
               support.
             </p>
@@ -739,6 +849,18 @@ export default function App() {
               onChange={(e) => setTalent({ ...talent, email: e.target.value })}
             />
             <input
+              placeholder="LinkedIn URL (preferred)"
+              value={talent.linkedin || ""}
+              onChange={(e) =>
+                setTalent({ ...talent, linkedin: e.target.value })
+              }
+            />
+            <input
+              placeholder="Other social handle or portfolio link (optional)"
+              value={talent.social || ""}
+              onChange={(e) => setTalent({ ...talent, social: e.target.value })}
+            />
+            <input
               placeholder="Phone (optional)"
               value={talent.phone}
               onChange={(e) => setTalent({ ...talent, phone: e.target.value })}
@@ -770,6 +892,70 @@ export default function App() {
                 setTalent({ ...talent, experience: e.target.value })
               }
             />
+
+            {/* Preference */}
+            <div style={{ marginTop: 4 }}>
+              <div style={{ fontWeight: 900, marginBottom: 6 }}>
+                Preference (optional)
+              </div>
+
+              <div
+                style={{
+                  display: "flex",
+                  gap: 14,
+                  flexWrap: "wrap",
+                  alignItems: "center",
+                }}
+              >
+                {[
+                  { value: "volunteer", label: "Volunteer" },
+                  { value: "contractor", label: "Contractor" },
+                  { value: "both", label: "Both" },
+                ].map((opt) => (
+                  <label
+                    key={opt.value}
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                      cursor: "pointer",
+                      padding: "8px 10px",
+                      borderRadius: 12,
+                      border: `1px solid ${theme.border}`,
+                      background:
+                        talent.preference === opt.value
+                          ? theme.surface
+                          : theme.inputBg,
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      name="talentPreference"
+                      value={opt.value}
+                      checked={talent.preference === opt.value}
+                      onChange={(e) =>
+                        setTalent({ ...talent, preference: e.target.value })
+                      }
+                      style={{ accentColor: theme.primary }}
+                    />
+                    <span style={{ fontWeight: 800 }}>{opt.label}</span>
+                  </label>
+                ))}
+              </div>
+
+              {/* Soft disclaimer */}
+              <p
+                style={{
+                  margin: "10px 0 0",
+                  lineHeight: 1.5,
+                  color: theme.textMuted,
+                }}
+              >
+                We’ll always do our best to match your preference. Final
+                placements may shift based on event needs, schedule coverage,
+                and role fit.
+              </p>
+            </div>
 
             <div
               style={{
@@ -843,7 +1029,9 @@ export default function App() {
               <input
                 placeholder="Full name"
                 value={sales.contactName}
-                onChange={(e) => setSales({ ...sales, contactName: e.target.value })}
+                onChange={(e) =>
+                  setSales({ ...sales, contactName: e.target.value })
+                }
               />
               <input
                 placeholder="Email"
@@ -976,34 +1164,34 @@ export default function App() {
         /* Portrait / mobile cleanup */
         @media (max-width: 768px) and (orientation: portrait) {
 
-  /* Reduce section padding */
-  section {
-    padding: 80px 20px !important;
-  }
+          /* Reduce section padding */
+          section {
+            padding: 80px 20px !important;
+          }
 
-  /* Collapse all grids */
-  section div[style*="grid-template-columns"] {
-  grid-template-columns: 1fr !important;
-}
+          /* Collapse all grids */
+          section div[style*="grid-template-columns"] {
+            grid-template-columns: 1fr !important;
+          }
 
-  /* Hero headline scale */
-  h1 {
-    font-size: 36px !important;
-    line-height: 1.08 !important;
-    letter-spacing: -0.6px !important;
-  }
+          /* Hero headline scale */
+          h1 {
+            font-size: 36px !important;
+            line-height: 1.08 !important;
+            letter-spacing: -0.6px !important;
+          }
 
-  h2 {
-    font-size: 32px !important;
-  }
+          h2 {
+            font-size: 32px !important;
+          }
 
-  /* Reduce hero vertical padding */
-  section:first-of-type {
-    padding-top: 100px !important;
-    padding-bottom: 60px !important;
-  }
+          /* Reduce hero vertical padding */
+          section:first-of-type {
+            padding-top: 100px !important;
+            padding-bottom: 60px !important;
+          }
 
-}
+        }
       `}</style>
     </div>
   );
