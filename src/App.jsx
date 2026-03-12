@@ -542,9 +542,7 @@ export default function App() {
             null,
             { number: "4", label: "Combined years at RenderATL" },
             null,
-            { number: "400+", label: "Volunteers coordinated" },
-            null,
-            { number: "3", label: "Major productions" },
+            { number: "400+", label: "Volunteers coordinated" }
           ].map((item, i) =>
             item === null ? (
               <div key={i} className="hide-mobile" style={{ width: 1, height: 40, background: "rgba(255,255,255,0.15)", margin: "0 40px", flexShrink: 0 }} />
@@ -567,14 +565,14 @@ export default function App() {
         <div style={{ maxWidth: 760, margin: "0 auto", textAlign: "center" }}>
           <SectionHeader
             eyebrow="Who We Are"
-            title="Built from the floor up."
+            title="Built from the ground up."
             center
           />
           <p style={{ fontSize: 17, lineHeight: 1.8, color: theme.textMuted, fontWeight: 300, margin: "0 0 24px" }}>
-            Motion & Method was founded by two people who started as volunteers and spent years running the floor before they had a company name. We didn't build a methodology in theory — we built it under pressure, at scale, in front of thousands of people.
+            Motion & Method was founded by two people who started as volunteers and spent years executing events before they had a company name. We didn't build a methodology in theory, we built it under pressure, at scale, in front of thousands of people.
           </p>
           <p style={{ fontSize: 17, lineHeight: 1.8, color: theme.textMuted, fontWeight: 300, margin: 0 }}>
-            We exist because most events are staffed but not <em>structured</em>. People show up without clarity, teams run without support, and execution depends on whoever's willing to improvise. We fix that — at the system level, not the surface level.
+            We exist because most events are staffed but not <em>structured</em>. People show up without clarity, teams run without support, and execution depends on whoever's willing to improvise. We fix that at the system level, not the surface level.
           </p>
         </div>
       </Section>
@@ -584,7 +582,7 @@ export default function App() {
         <SectionHeader
           eyebrow="Who We Work With"
           title="You'll recognize yourself here."
-          subtitle="We work with organizations running complex, high-coordination operations where execution has to work — not just happen."
+          subtitle="We work with organizations running complex, high-coordination operations where execution has to work, not just happen."
         />
         <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
           {[
@@ -647,30 +645,30 @@ export default function App() {
         <SectionHeader
           eyebrow="Proven Work"
           title="The methods were tested before the company had a name."
-          subtitle="Motion & Method's operating frameworks were developed and battle-tested across these productions. The system works because we've already run it — at scale, under pressure, for real audiences."
+          subtitle="Motion & Method's operating frameworks were developed and battle-tested across these productions. The system works because we've already run it at scale, under pressure, for real audiences."
         />
 
         <div className="three-col" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginBottom: 24 }}>
           {[
             {
               name: "RenderATL",
-              tag: "4 combined years · Paid engagement",
+              tag: "4 combined years",
               stats: "8,000+ attendees at peak",
-              desc: "Atlanta's premier tech conference. Driver operated for 3 years, Ash for 1. The system that became Motion & Method's foundation was stress-tested here — volunteer coordination, zone management, and Axis deployed at full scale.",
+              desc: "Atlanta's premier tech conference. The system that became Motion & Method's foundation was stress-tested here — volunteer coordination, zone management, and Axis deployed at full scale.",
               color: theme.secondary,
             },
             {
               name: "Atlanta Tech Week",
-              tag: "1 year · Paid engagement",
+              tag: "1 year",
               stats: "Multi-event format",
               desc: "Multi-day, city-wide tech activation. Motion & Method's multi-event coordination model and leadership frameworks were proven across simultaneous productions.",
               color: theme.accent,
             },
             {
               name: "GovTechCon",
-              tag: "2 years · Axis mobile proven here",
-              stats: "60 attendees Year 1",
-              desc: "Government technology conference run primarily using the Axis mobile platform. First field validation of Axis in a live, high-coordination environment.",
+              tag: "2 years",
+              stats: "600+ attendees Year 1",
+              desc: "Government technology conference run primarily using the Axis mobile platform. First full field validation of Axis in a live, high-coordination environment.",
               color: theme.primary,
             },
           ].map(({ name, tag, stats, desc, color }) => (
